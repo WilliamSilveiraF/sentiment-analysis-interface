@@ -1,9 +1,12 @@
+import { useAudioAnalysis } from '../../contexts/AudioAnalysisContext'
 import './HomePage.css'
 import React, { useRef } from "react"
 
+
 export default function HomePage() {
+    const { saveAudioFile } = useAudioAnalysis()
     const fileInputRef = useRef<HTMLInputElement>(null)
-  
+
     const handleUploadClick = () => {
       if (fileInputRef.current) {
         fileInputRef.current.click()
@@ -15,8 +18,7 @@ export default function HomePage() {
         const file = event.target.files[0]
         
         if (file.type.startsWith('audio/')) {
-          console.log('Audio file selected: ', file)
-          // TODO: upload the file
+          saveAudioFile(file)
         } else {
           console.error('Please select an audio file')
         }
@@ -24,6 +26,8 @@ export default function HomePage() {
         console.error('No file selected')
       }
     }
+
+
   
     return <div className='HomePage'>
       <div className="HomePage-container">
@@ -43,13 +47,16 @@ export default function HomePage() {
                 Alternatively, you can select a file by <br/><strong>clicking here</strong>
             </span>
           </button>
-          <input 
-            type="file"
-            accept='audio/*'
-            ref={fileInputRef}
-            onChange={handleFileChange}
-            style={{ display: 'none' }}
-          />
+          <form>
+            <input 
+              type="file"
+              accept='audio/*'
+              ref={fileInputRef}
+              onChange={handleFileChange}
+              style={{ display: 'none' }}
+            />
+          </form>
+          
         </div>
       </div>
     </div>
