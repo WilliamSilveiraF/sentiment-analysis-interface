@@ -1,0 +1,26 @@
+.VisualizationPage {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+  
+.VisualizationPage-container {
+    width: 90%;
+    max-width: 700px;
+    background-color: var(--container-background);
+    border-radius: 0.5rem;
+    box-shadow: 0 5px 15px rgba(#000, .2);
+    padding: 2rem;
+}
+
+.VisualizationPage-container-title {
+    font-weight: 700;
+}
+
+.VisualizationPage-container-description {
+    color: var(--c-text-secondary);
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    font-size: 0.9rem;
+}

@@ -1,18 +1,12 @@
 import React, { useContext, useState } from "react";
-import api from "../helpers/api";
+import api from "../../helpers/api";
 import { AxiosResponse } from "axios";
-import LoadingPage from "../pages/LoadingPage/LoadingPage";
+import LoadingPage from "../../pages/LoadingPage/LoadingPage";
+import { ActionProps, ActionProviderProps } from "./types";
 
-interface ActionProps {
-    loading: boolean;
-    setLoading: React.Dispatch<React.SetStateAction<boolean>>;
-}
-
-interface ActionProviderProps {
-    children: React.ReactNode;
-}
 
 const ActionContext = React.createContext<ActionProps | undefined>(undefined);
+
 
 export function useAction() {
     const context = useContext(ActionContext)

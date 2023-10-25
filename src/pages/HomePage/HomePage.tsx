@@ -1,4 +1,4 @@
-import { useAudioAnalysis } from '../../contexts/AudioAnalysisContext'
+import { useAudioAnalysis } from '../../contexts/AudioAnalysis/AudioAnalysisContext'
 import './HomePage.css'
 import React, { useRef } from "react"
 

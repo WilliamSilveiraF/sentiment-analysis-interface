@@ -1,15 +1,9 @@
 import React, { useContext, useState } from "react";
-import api from "../helpers/api";
+import api from "../../helpers/api";
 import { AxiosResponse } from "axios";
-import { useAction } from "./ActionContext";
-
-interface AudioAnalysisProps {
-    saveAudioFile: Function;
-}
-
-interface AudioAnalysisProviderProps {
-    children: React.ReactNode;
-}
+import { useAction } from "../Action/ActionContext";
+import { getAudioAnalysis, postUploadFile } from "./http";
+import { AudioAnalysisProps, AudioAnalysisProviderProps } from './types'
 
 const AudioAnalysisContext = React.createContext<AudioAnalysisProps | undefined>(undefined);
 
@@ -25,40 +19,40 @@ export function useAudioAnalysis() {
 const AudioAnalysisProvider: React.FC<AudioAnalysisProviderProps> = ({ children }) => {
     const { setLoading } = useAction()
 
+    const fetchAudioAnalysis = async (id: number) => {
+        setLoading(true)
+        await getAudioAnalysis(id)
+            .then (response => {
+                setLoading(false)
+                console.log('response', response)
+            })
+            .catch(error => {
+                setLoading(false)
+                window.alert('There was an error fetching the audio.')
+                console.error(error)
+            })
+    }
+
     const saveAudioFile = async (file: File) => {
         setLoading(true)
         await postUploadFile(file)
             .then(response => {
                 setLoading(false)
                 console.log('response', response)
-                
             })
             .catch(error => {
                 setLoading(false)
-                console.error('There was an error uploading the file.', error)
+                window.alert('There was an error uploading the file.')
+                console.error(error)
             })
     }
 
     return <AudioAnalysisContext.Provider value={{
-        saveAudioFile: saveAudioFile,
+        saveAudioFile,
+        fetchAudioAnalysis
     }}>
         {children}
     </AudioAnalysisContext.Provider>
 }
 
 export default AudioAnalysisProvider;
-
-async function postUploadFile(file: File): Promise<Response> {
-    const formData = new FormData();
-    formData.append('file', file);
-
-    const response = await fetch('http://localhost:8000/upload/', {
-        method: 'POST',
-        body: formData,
-    });
-    return response.json()
-    
-}
-
-
-
