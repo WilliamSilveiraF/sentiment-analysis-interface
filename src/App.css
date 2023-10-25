@@ -1,0 +1,28 @@
+*, *:after, *:before {
+	box-sizing: border-box;
+}
+
+:root {
+	--c-action-primary: #acb8cc;
+	--c-action-primary-accent: #e9e5ff;
+	--c-action-secondary: #e5e5e5;
+	--c-text-primary: #0d0f21; 
+	--c-text-secondary: #6a6b76;
+	--c-background-primary: #dfe7ef;
+  --container-background: #eef3f7;
+}
+
+body {
+	font-family: "Inter", sans-serif;
+	color: var(--c-text-primary);
+	background-color: var(--c-background-primary);	
+	line-height: 1.5;
+}
+
+input, button, select, textarea {
+	font: inherit;
+}
+
+.App {
+  height: 100vh;
+}
