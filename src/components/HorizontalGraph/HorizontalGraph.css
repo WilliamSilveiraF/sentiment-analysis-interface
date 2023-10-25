@@ -1,7 +1,6 @@
 :root {
     --barHeight: 20px;
     --borders: #717D95;
-    --primary: #59BAC0;
 }
 
 .HorizontalGraph {
@@ -21,23 +20,18 @@
 }
   
 .HorizontalGraph-bar {
-    background-color: var(--primary);    
+    background-color: var(--c-action-primary);    
     transition: all 1s ease-out;
     border-radius: 2px;
     cursor: pointer;
     margin-bottom: 10px;
     position: relative;
-    z-index: 9999;
+    z-index: 2;
     display: block;
     height: 20px;  
     width: 0%;
 }
-  
-.HorizontalGraph-bar:hover {
-    transition: all 0.5s ease;
-    background: #428D92;
-}
-  
+
 .HorizontalGraph-bar:last-child {
     margin-bottom: 0;
 }

@@ -1,9 +1,8 @@
 import React, { useContext, useState } from "react";
-import api from "../../helpers/api";
-import { AxiosResponse } from "axios";
 import { useAction } from "../Action/ActionContext";
 import { getAudioAnalysis, postUploadFile } from "./http";
-import { AudioAnalysisProps, AudioAnalysisProviderProps } from './types'
+import { AudioAnalysisProps, AudioAnalysisProviderProps, AudioAnalysisState } from './types'
+import { useNavigate } from "react-router-dom";
 
 const AudioAnalysisContext = React.createContext<AudioAnalysisProps | undefined>(undefined);
 
@@ -17,7 +16,9 @@ export function useAudioAnalysis() {
 }
 
 const AudioAnalysisProvider: React.FC<AudioAnalysisProviderProps> = ({ children }) => {
+    const navigate = useNavigate()
     const { setLoading } = useAction()
+    const [audioAnalysis, setAudioAnalysis] = useState<AudioAnalysisState>({} as AudioAnalysisState)
 
     const fetchAudioAnalysis = async (id: number) => {
         setLoading(true)
@@ -25,6 +26,7 @@ const AudioAnalysisProvider: React.FC<AudioAnalysisProviderProps> = ({ children 
             .then (response => {
                 setLoading(false)
                 console.log('response', response)
+                setAudioAnalysis(response)
             })
             .catch(error => {
                 setLoading(false)
@@ -37,8 +39,8 @@ const AudioAnalysisProvider: React.FC<AudioAnalysisProviderProps> = ({ children 
         setLoading(true)
         await postUploadFile(file)
             .then(response => {
-                setLoading(false)
                 console.log('response', response)
+                navigate(`/audio/${response.audio_id}`)
             })
             .catch(error => {
                 setLoading(false)
@@ -49,7 +51,8 @@ const AudioAnalysisProvider: React.FC<AudioAnalysisProviderProps> = ({ children 
 
     return <AudioAnalysisContext.Provider value={{
         saveAudioFile,
-        fetchAudioAnalysis
+        fetchAudioAnalysis,
+        audioAnalysis
     }}>
         {children}
     </AudioAnalysisContext.Provider>

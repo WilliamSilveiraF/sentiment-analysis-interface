@@ -1,22 +1,32 @@
 import { useParams } from 'react-router-dom'
 import './VisualizationPage.css'
 import HorizontalGraph from '../../components/HorizontalGraph/HorizontalGraph'
+import { useAudioAnalysis } from '../../contexts/AudioAnalysis/AudioAnalysisContext'
+import { useEffect } from 'react'
 
-const barData = [
-    { value: 28.5, label: 'Positivo' },
-    { value: 100, label: 'Neutro' },
-    { value: 70, label: 'Negativo' },
-]
 export default function VisualizationPage() {
     const { id } =  useParams()
-    
+    const { fetchAudioAnalysis, audioAnalysis } = useAudioAnalysis()
+
+    useEffect(() => {
+        fetchAudioAnalysis(Number(id))
+    }, [])
+
+    console.log('audioAnalysis', audioAnalysis)
+
     return <div className='VisualizationPage'>
         <div className='VisualizationPage-container'>
-            <h2 className="VisualizationPage-container-title">Arquivo - whatsapp.mp3</h2>
-            <p className="VisualizationPage-container-description">Lorem ipsum dolor sit amet. Hic debitis distinctio et nemo aperiam ad dolores quas ut omnis esse. Non repudiandae obcaecati est illum perspiciatis aut excepturi enim. Cum nisi quia et asperiores porro eum debitis aliquam est laborum iusto At dignissimos esse? Vel quis eveniet ut accusamus quam id incidunt rerum.</p>
-            <HorizontalGraph data={barData} />
-            <p className="VisualizationPage-container-description">Sumário: </p>
-            <p className="VisualizationPage-container-description"> Lorem ipsum dolor sit amet. Hic debitis distinctio et nemo aperiam ad dolores quas ut omnis esse. Non repudiandae obcaecati est illum perspiciatis aut excepturi enim. Cum nisi quia et asperiores porro eum debitis aliquam est laborum iusto At dignissimos esse? Vel quis eveniet ut accusamus quam id incidunt rerum.</p>
+            <h2 className="VisualizationPage-container-title">{audioAnalysis.filename}</h2>
+            <p className="VisualizationPage-container-description">{audioAnalysis.transcription}</p>
+            <HorizontalGraph 
+                data={[
+                    { value: audioAnalysis.positive_score * 100, label: 'Positive' },
+                    { value: audioAnalysis.neutral_score * 100, label: 'Neutral' },
+                    { value: audioAnalysis.negative_score * 100, label: 'Negative' },
+                ]}
+            />
+            <p className="VisualizationPage-container-description">Summary: </p>
+            <p className="VisualizationPage-container-description">{audioAnalysis.summary}</p>
         </div>
         
     </div>

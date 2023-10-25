@@ -1,4 +1,6 @@
-export async function postUploadFile(file: File): Promise<Response> {
+import { UploadResponse, AudioAnalysisState } from "./types";
+
+export async function postUploadFile(file: File): Promise<UploadResponse> {
     const formData = new FormData();
     formData.append('file', file);
 
@@ -10,7 +12,7 @@ export async function postUploadFile(file: File): Promise<Response> {
     return response.json()
 }
 
-export async function getAudioAnalysis(id: number): Promise<Response> {
+export async function getAudioAnalysis(id: number): Promise<AudioAnalysisState> {
     const response = await fetch(`http://localhost:8000/audio/${id}`)
     
     return response.json()
