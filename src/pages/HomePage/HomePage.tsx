@@ -12,19 +12,32 @@ export default function HomePage() {
         fileInputRef.current.click()
       }
     }
-  
+
     const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-      if (event.target.files && event.target.files.length > 0) {
-        const file = event.target.files[0]
-        
+      processFiles(event.target.files);
+    }
+
+    const processFiles = (files: FileList | null) => {
+      if (files && files.length > 0) {
+        const file = files[0];
+
         if (file.type.startsWith('audio/')) {
-          saveAudioFile(file)
+          saveAudioFile(file);
         } else {
-          console.error('Please select an audio file')
+          console.error('Please select an audio file');
         }
       } else {
-        console.error('No file selected')
+        console.error('No file selected');
       }
+    }
+    
+    const handleDragOver = (event: React.DragEvent) => {
+      event.preventDefault();
+    }
+
+    const handleDrop = (event: React.DragEvent) => {
+      event.preventDefault();
+      processFiles(event.dataTransfer.files);
     }
 
 
@@ -34,7 +47,12 @@ export default function HomePage() {
         <div className="HomePage-container-body">
           <h2 className="HomePage-container-title">Upload a file</h2>
           <p className="HomePage-container-description">Attach the file below</p>
-          <button className="HomePage-upload-area" onClick={handleUploadClick}>
+          <button 
+            className="HomePage-upload-area" 
+            onClick={handleUploadClick}
+            onDragOver={handleDragOver}
+            onDrop={handleDrop}
+          >
             <span className="HomePage-upload-area-icon">
             <svg width="34px" height="42px" viewBox="0 0 340.531 419.116">
               <g id="files-new" clipPath="url(#clip-files-new)">
