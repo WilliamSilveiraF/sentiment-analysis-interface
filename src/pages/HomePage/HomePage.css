@@ -1,70 +1,182 @@
-.HomePage {
+.HomePage-Header {
+    height: 80px;
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+    border-bottom: 1 solid rgb(18, 26, 36);
 }
-  
-.HomePage-container {
-    width: 90%;
-    max-width: 500px;
-    background-color: var(--container-background);
-    border-radius: 0.5rem;
-    box-shadow: 0 5px 15px rgba(#000, .2);
-    padding: 0.5rem 0rem 2rem;
+
+.HomePage-Header-Menu {
+    width: 100vw;
+    max-width: var(--large-screen);
+    color: var(--primary-color);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
-  
-.HomePage-container-body {
-    padding: 1rem 1.5rem;
+
+.HomePage-Header-Menu-CTA {
+    display: flex;
+    align-items: center;
+    column-gap: 0.5rem;    
 }
-  
-.HomePage-container-title {
+
+.Logo {
+    font-weight: 700;
+    font-size: 1.8rem;
+    color: var(--primary-color);
+}
+
+.HowToBuildCompilation {
+    height: 72px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    cursor: pointer;
+    color: black;
+    background-color: #F5F6F7;
+}
+
+.HowToBuildCompilation > b {
     font-weight: 700;
 }
-  
-.HomePage-container-description {
-    color: var(--c-text-secondary);
+
+.HomePage-MainContent {
+    display: flex;
+    justify-content: center;
 }
-  
-.HomePage-upload-area {
-    cursor: pointer;
-    margin-top: 1.25rem;
-    border: none;
-    background-image: url("data:image/svg+xml,%3csvg width='100%25' height='100%25' xmlns='http://www.w3.org/2000/svg'%3e%3crect width='100%25' height='100%25' fill='none' stroke='%23ccc' stroke-width='3' stroke-dasharray='6%2c 14' stroke-dashoffset='0' stroke-linecap='square'/%3e%3c/svg%3e");
-    background-color: transparent;
-    padding: 3rem;
-    width: 100%;
+
+.HomePage-MainContent-Menu {
+    max-width: var(--large-screen);
+    width: 100vw;
+    height: 72vh;
+    min-height: 724px;
+    display: grid;
+    align-items: center;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 1rem;
+}
+
+.HomePage-MainContent-Menu-TextSection {
+    display: grid;
+    row-gap: 2rem;
+}
+
+.HomePage-MainContent-Menu-TextSection h1 {
+    font-weight: 600;
+    font-size: 60px;
+    line-height: 67px;
+}
+
+.HomePage-MainContent-Menu-TextSection p {
+    color: rgb(22, 22, 24);
+    font-weight: 700;
+}
+
+.HomePage-MainContent-Menu-TextSection-BtnRow {
+    display: flex;
+    column-gap: 0.5rem;
+}
+
+.HomePage-CaseUse {
+    display: flex;
+    justify-content: center;
+    background-color: var(--primary-color);
+}
+
+.HomePage-CaseUse-Menu {
+    max-width: var(--large-screen);
+    width: 100vw;
+    height: 72vh;
+    min-height: 724px;
+    padding: 3rem 0rem;
+    color: white;
+    display: grid;
+    align-items: center;
+    grid-template-rows: min-content min-content;
+    row-gap: 2.5rem;
+}
+
+.HomePage-CaseUse-Menu h1 {
+    font-size: 60px;
+    line-height: 72px;
+    width: 60%;
+}
+
+.HomePage-CaseUse-Menu-Cards {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    column-gap: 0.5rem;
+}
+
+.HomePage-CaseUse-Menu-Cards > div {
+    background-color: #0763ED;
+    border-radius: 4px;
+    height: 300px;
+}
+
+.HomePage-LetsGetStarted {
+    display: flex;
+    justify-content: center;
+    height: fit-content;
+}
+
+.HomePage-LetsGetStarted-Menu {
+    max-width: var(--large-screen);
+    width: 100vw;
+    padding: 4rem 0rem;
+    color: white;
+    display: grid;
+    color: rgb(22, 22, 24);
     display: flex;
     flex-direction: column;
     align-items: center;
-    &:hover, &:focus {
-        background-image: url("data:image/svg+xml,%3csvg width='100%25' height='100%25' xmlns='http://www.w3.org/2000/svg'%3e%3crect width='100%25' height='100%25' fill='none' stroke='%2371829e' stroke-width='3' stroke-dasharray='6%2c 14' stroke-dashoffset='0' stroke-linecap='square'/%3e%3c/svg%3e");
-    }
+    row-gap: 1rem;
+    text-align: center;
+    
 }
-  
-.HomePage-upload-area-icon {
-    display: block;
-    width: 2.25rem;
-    height: 2.25rem;
-    svg {
-        max-height: 100%;
-        max-width: 100%;
-    }
-}
-  
-.HomePage-upload-area-title {
-    margin-top: 1rem;
-    display: block;
+
+.HomePage-LetsGetStarted-Menu > h1 {
     font-weight: 700;
-    color: var(--c-text-primary);
+    font-size: 40px;
+    line-height: 48px;
 }
-  
-.HomePage-upload-area-description {
-    display: block;
-    color: var(--c-text-secondary);
-    strong {
-        color: var(--c-action-primary);
-        font-weight: 700;
-    }
+
+.HomePage-LetsGetStarted-Menu > p {
+    margin-bottom: 1rem;
+    font-size: 21px;
+    line-height: 48px;
+    font-weight: 500;
 }
-  
+
+.HomePage-LetsGetStarted-Menu-Btn {
+}
+
+.Footer {
+    height: 38vh;
+    min-height: 320px;
+    background-color: #f7f7f8;
+    display: flex;
+    justify-content: center;
+    padding: 2rem 0;
+    color: rgb(153, 153, 153);
+}
+
+.Footer-Wrapper {
+    display: grid;
+    grid-template-rows: 1fr min-content;
+    row-gap: 2rem;
+}
+
+.Footer-Wrapper-Copy {
+    font-size: 1rem;
+    font-weight: 500;
+}
+
+.Footer-Menu {
+    max-width: var(--large-screen);
+    width: 100vw;
+    height: 100%;
+    border-bottom: 0.5px solid rgb(153, 153, 153);
+}
